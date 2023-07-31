@@ -1,0 +1,32 @@
+[init]
+    defaultBranch = main
+    templatedir = ~/.config/git/templates
+[user]
+    name = hyperbola
+    email = me@hyperbola.me
+    signingkey = 32F798E7BB12215E8B121E3EFCA80CFBF8DD7D2F
+[commit]
+    gpgsign = true
+[alias]
+    # common
+    aa = add .
+    unadd = rm -r --cached --
+    b = branch
+    c = checkout
+    s = switch
+    ss = status
+    cc = commit --amend --no-edit
+    ccc = commit -C HEAD@{1}
+    cp = cherry-pick
+    rr = rebase -i
+    rss = reset --hard
+    ## logs
+    l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    ll = l -p
+[core]
+    excludesFile = ~/.config/git/ignore
+[pull]
+    ff = only
+[push]
+	autoSetupRemote = true
+	default = current

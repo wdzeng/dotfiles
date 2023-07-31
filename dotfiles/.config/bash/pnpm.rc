@@ -1,0 +1,2 @@
+export PNPM_HOME="/home/hyperbola/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"

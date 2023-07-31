@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+# This post-rewrite hooks help you rebase commits along with tags!
+#
+# To enable this hook:
+#
+#    git config rr.tags true
+#
+# Sometimes the rebase behaviour is more complex then expected (e.g. rebase with
+# `git rebase -x git commit ...`), and tags may not be rebased correctly. In this
+# case, enable the "track" mode.
+#
+#    git config rr.track true
+#
+# After a rebase, remember to remove the track file at /tmp/tags. This step is not essential, but
+# improves the efficiency in the future rebases.
+
+import distutils.util
+import json
+import os
+import subprocess
+import sys
+
+args = sys.stdin.read().split()
+commits = zip(*[iter(args)] * 2)
+
+WARNING = '\033[93m'
+ENDC = '\033[0m'
+
+
+def get_config_value(key: str) -> bool:
+    try:
+        stdout = subprocess.check_output(
+            ['git', 'config', '--get', '--bool', key], encoding='utf-8')
+        return bool(distutils.util.strtobool(stdout.strip()))
+    except subprocess.CalledProcessError:
+        return False
+
+
+_HOOK_ENABLED = get_config_value('rr.tags')
+_HOOK_TRACK = get_config_value('rr.track')
+_TRACK_FILE = '/tmp/tags'
+
+
+def get_latest_value(d, k):
+    if k not in d:
+        return k
+    ret = get_latest_value(d, d[k])
+    d[k] = ret
+    return ret
+
+
+if _HOOK_ENABLED:
+    commit_map = {}
+    if _HOOK_TRACK:
+        try:
+            with open(_TRACK_FILE, 'r', encoding='utf8') as f:
+                commit_map = json.loads(f.read())
+        except FileNotFoundError:
+            pass
+
+    for (old, new) in commits:
+        if old != new:
+            commit_map[old] = get_latest_value(commit_map, new)
+
+    for old in commit_map:
+        new = get_latest_value(commit_map, old)
+        stdout = subprocess.check_output(['git', 'tag', '--points-at', old],
+                                         encoding='utf-8')
+        tags = stdout.splitlines()
+        for tag in tags:
+            subprocess.call(['git', 'tag', '-f', tag, new])
+
+    if _HOOK_TRACK:
+        with open(_TRACK_FILE, 'w+', encoding='utf-8') as f:
+            f.write(json.dumps(commit_map))

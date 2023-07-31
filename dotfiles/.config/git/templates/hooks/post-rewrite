@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+cd "$(dirname "$0")"
+if [[ -d "../scripts/post-rewrite" ]]; then
+    shopt -s nullglob
+    for h in ../scripts/post-rewrite/*; do
+        [[ -x "$h" ]] && "$h"
+    done
+fi

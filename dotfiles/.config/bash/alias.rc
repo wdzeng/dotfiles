@@ -1,0 +1,5 @@
+alias ls='ls -h --color=auto'
+alias ll='ls -lh --color=auto'
+alias lll='ls -alh --color=auto'
+alias tree="tree -alI 'node_modules|.git|.next|out'"
+alias docker=podman

@@ -1,0 +1,48 @@
+# https://github.com/mgedmin/dotfiles/blob/master/bashrc.colors
+
+# Make sure we advertise 256-color support
+
+# Note: gnome-terminal doesn't set $COLORTERM since version 3.14, so we can't
+# distinguish gnome-terminal from other xterm clones any more and have to
+# assume all xterms support 256-color modes nowadays.
+[ "$TERM" = "xterm" ] && TERM=xterm-256color
+[ "$TERM" = "screen" ] && TERM=screen-256color
+
+# Make sure we don't use 256-color $TERM if it's not supported by the system
+# terminfo (even if TERM was propagated by ssh from a local system where it is
+# supported by terminfo).
+[ "$TERM" = "xterm-256color" ] && ! [ -f /lib/terminfo/x/$TERM ] && ! [ -f /usr/share/terminfo/x/$TERM ] && TERM=xterm
+[ "$TERM" = "screen-256color" ] && ! [ -f /lib/terminfo/s/$TERM ] && ! [ -f /usr/share/terminfo/s/$TERM ] && TERM=screen
+
+# Enable color support of ls and grep
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+fi
+
+# NB: busybox grep does not support --color
+if command grep --help |& command grep -q -e --color; then
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# The default color scheme of exa is very piercing
+export EXA_COLORS="ur=33:uw=38;5;210:ux=32:gw=38;5;210:uu=33:README*=38;5;208:Makefile=33:Cargo.toml=33"
+
+# gcc can do colors too!  the magic string is copied from
+# https://gcc.gnu.org/onlinedocs/gcc-8.3.0/gcc/Diagnostic-Message-Formatting-Options.html#Diagnostic-Message-Formatting-Options
+export GCC_COLORS="error=01;31:warning=01;35:note=01;36:range1=32:range2=34:locus=01:quote=01:fixit-insert=32:fixit-delete=31:diff-filename=01:diff-hunk=32:diff-delete=31:diff-insert=32:type-diff=01;32"
+
+# my terminals used to be black on white
+if false; then
+    export DSTAT_OPTS="--bw"
+    export BAT_THEME=OneHalfLight
+else
+    # now they're dark
+    export DSTAT_OPTS=
+    export BAT_THEME=OneHalfDark
+fi
+
+# vim: ft=sh
