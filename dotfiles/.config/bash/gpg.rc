@@ -1,1 +1,3 @@
-export GPG_TTY=$(tty)
+which gpg >/dev/null && export GPG_TTY=$(tty)
+
+# vim: ft=bash

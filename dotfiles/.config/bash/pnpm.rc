@@ -1,2 +1,7 @@
-export PNPM_HOME="/home/hyperbola/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+if which pnpm >/dev/null; then
+    mkdir -p "$HOME/.local/share/"
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+    export PATH="$PNPM_HOME:$PATH"
+fi
+
+# vim: ft=sh

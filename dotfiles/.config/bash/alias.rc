@@ -24,6 +24,9 @@ ll() {
   fi
 }
 
-alias tree="tree -alI 'node_modules|.git|.next|out'"
-alias docker=podman
+alias tree="tree -alI 'node_modules|.pnpm-store|.git'"
 
+# Alias docker to podman if podman is installed.
+which podman >/dev/null && alias docker=podman
+
+# vim: ft=bash

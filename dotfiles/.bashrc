@@ -82,9 +82,11 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Load all scripts under ~/.config/bash/
-if [[ -e "$HOME/.config/bash" ]]; then
-    for f in ~/.config/bash/*.rc; do
+if [[ -d "$HOME/.config/bash" ]]; then
+    for f in "$HOME/.config/bash/*.rc"; do
         # Ignore all .pre.rc files
         if [[ "$f" != *.pre.rc ]]; then
             . "$f"

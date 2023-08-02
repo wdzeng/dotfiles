@@ -1,4 +1,7 @@
-export EDITOR=nvim
-alias vim=nvim
-alias view='nvim -R'
+if which nvim >/dev/null; then
+    export EDITOR=nvim
+    alias vim=nvim
+    alias view='nvim -R'
+fi
 
+# vim: ft=bash
