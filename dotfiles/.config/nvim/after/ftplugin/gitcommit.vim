@@ -1,6 +1,6 @@
 set wrap
 set textwidth=72
-set complete+=kspell
+set spell
 
 " Highlight texts that exceed the maximal line width
 highlight OverLength ctermbg=darkred ctermfg=white
