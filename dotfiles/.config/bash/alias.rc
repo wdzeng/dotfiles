@@ -1,5 +1,29 @@
-alias ls='ls -h --color=auto'
-alias ll='ls -lh --color=auto'
-alias lll='ls -alh --color=auto'
+alias ls='ls -h --group-directories-first --color=auto'
+alias lll='ls -Al'
+
+# Equivalent to `ls -l`, or `ls -Al` if all files start with a dot.
+ll() {
+  if [[ $# -ne 0 ]]; then
+    ls -l "$@"
+    return
+  fi
+
+  target="${1:-.}"
+  shopt -s nullglob
+  local all_files_start_with_dot=true
+  for entry in "$target"/*; do
+    all_files_start_with_dot=false
+    break
+  done
+  shopt -u nullglob
+
+  if $all_files_start_with_dot; then
+    ls -Al "$target"
+  else
+    ls -l "$target"
+  fi
+}
+
 alias tree="tree -alI 'node_modules|.git|.next|out'"
 alias docker=podman
+
