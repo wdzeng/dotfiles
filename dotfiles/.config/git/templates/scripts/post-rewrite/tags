@@ -74,3 +74,5 @@ if _HOOK_ENABLED:
     if _HOOK_TRACK:
         with open(_TRACK_FILE, 'w+', encoding='utf-8') as f:
             f.write(json.dumps(commit_map))
+
+# vim: ft=python
