@@ -86,7 +86,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Load all scripts under ~/.config/bash/
 if [[ -d "$HOME/.config/bash" ]]; then
-    for f in "$HOME/.config/bash/*.rc"; do
+    for f in "$HOME"/.config/bash/*.rc; do
         # Ignore all .pre.rc files
         if [[ "$f" != *.pre.rc ]]; then
             . "$f"
