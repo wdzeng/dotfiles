@@ -1,0 +1,17 @@
+# All directories and files in this list is managed.
+# All paths should be relative to homedir.
+
+# bash
+.bashrc
+.profile
+.config/bash
+
+# git
+.gitconfig
+.config/git
+
+# editor
+.config/nvim
+
+# tmux
+.tmux.conf

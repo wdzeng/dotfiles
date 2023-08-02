@@ -4,13 +4,13 @@ My dotfiles.
 
 ## Usage
 
-Copy dotfiles to local.
+Restore dotfiles to local.
 
 ```sh
-./install.sh
+./restore.sh
 ```
 
-Copy local dotfiles to repo.
+Copy local dotfiles to this repo.
 
 ```sh
 ./sync.sh
