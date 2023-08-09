@@ -4,4 +4,4 @@ set spell
 
 " Highlight texts that exceed the maximal line width
 highlight OverLength ctermbg=darkred ctermfg=white
-match OverLength /\%73v.*/
+match OverLength /\%>72v.\+/
