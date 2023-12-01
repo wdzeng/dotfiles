@@ -1,36 +1,34 @@
+# shellcheck shell=bash
+# vim: ft=bash
+
 alias ls='ls -h --group-directories-first --color=auto'
 alias lll='ls -Al'
 
 # A more powerful listing files. If all files are dotfiles, this is equivalent to `ls -al`;
 # otherwise show only non-dotfiles (`ls -l`).
 ll() {
-  # If the user speicifies more than one argument, just interpret it as `ls -l`.
-  if [[ $# -gt 1 ]]; then
-    ls -l "$@"
-    return
-  fi
-
-  target="${1:-.}"
-
-  # If the target does not exit, do what `ls -l` does.
-  if [ ! -e "$target" ]; then
-    ls -l "$target"
-    return
-  fi
-
-  for item in "$target"/*; do
-    if [ -e "$item" ] && [[ $(basename "$item") != .* ]]; then
-      ls -l "$target"
-      return
+    # If the user speicifies more than one argument, just interpret it as `ls -l`.
+    if [[ $# -gt 1 ]]; then
+        ls -l "$@"
+        return
     fi
-  done
 
-  ls -Al "$target"
+    target="${1:-.}"
+
+    # If the target does not exit, do what `ls -l` does.
+    if [ ! -e "$target" ]; then
+        ls -l "$target"
+        return
+    fi
+
+    for item in "$target"/*; do
+        if [ -e "$item" ] && [[ $(basename "$item") != .* ]]; then
+            ls -l "$target"
+            return
+        fi
+    done
+
+    ls -Al "$target"
 }
 
 alias tree="tree -alI 'node_modules|.pnpm-store|.git'"
-
-# Alias docker to podman if podman is installed.
-which podman >/dev/null && alias docker=podman
-
-# vim: ft=bash

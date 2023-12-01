@@ -1,3 +1,7 @@
-which gpg >/dev/null && export GPG_TTY=$(tty)
-
+# shellcheck shell=bash
 # vim: ft=bash
+
+if gpg --version >/dev/null; then
+    the_tty=$(tty)
+    export GPG_TTY="$the_tty"
+fi

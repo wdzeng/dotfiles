@@ -1,5 +1,8 @@
 # https://github.com/mgedmin/dotfiles/blob/master/bashrc.history
 
+# shellcheck shell=bash
+# vim: ft=bash
+
 # Configure history management:
 # - ignore duplicates
 # - ignore lines starting with a space
@@ -25,5 +28,3 @@ HISTFILESIZE=500000
 # Save the history after every command
 # (note: PROMPT_COMMAND is overwritten by bashrc.title)
 PROMPT_COMMAND='history -a'
-
-# vim: ft=sh

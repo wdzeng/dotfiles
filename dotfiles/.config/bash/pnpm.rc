@@ -1,7 +1,8 @@
-if which pnpm >/dev/null; then
-    mkdir -p "$HOME/.local/share/"
-    export PNPM_HOME="$HOME/.local/share/pnpm"
+# shellcheck shell=bash
+# shellcheck source=/dev/null
+
+PNPM_HOME="$HOME/.local/share/pnpm"
+if [ -d "$PNPM_HOME" ]; then
+    export PNPM_HOME
     export PATH="$PNPM_HOME:$PATH"
 fi
-
-# vim: ft=sh

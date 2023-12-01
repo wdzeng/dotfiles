@@ -1,7 +1,8 @@
-if which nvim >/dev/null; then
+# shellcheck shell=bash
+# vim: ft=bash
+
+if nvim --version >/dev/null; then
     export EDITOR=nvim
     alias vim=nvim
     alias view='nvim -R'
 fi
-
-# vim: ft=bash

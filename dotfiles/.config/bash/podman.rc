@@ -1,0 +1,4 @@
+# shellcheck shell=bash
+# vim: ft=bash
+
+podman --version >/dev/null && alias docker=podman
