@@ -1,3 +1,0 @@
-#which cargo >/dev/null && . "$HOME/.cargo/env"
-
-# vim: ft=bash
