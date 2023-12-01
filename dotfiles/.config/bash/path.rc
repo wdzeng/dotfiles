@@ -1,0 +1,7 @@
+# shellcheck shell=bash
+# vim: ft=bash
+
+local_bin="$HOME/.local/bin"
+if [ -d "$local_bin" ]; then
+    export PATH="$local_bin:$PATH"
+fi

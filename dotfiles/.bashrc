@@ -75,7 +75,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-export PATH="$HOME/.local/bin:$PATH"
 
 # Load all scripts under ~/.config/bash/
 if [[ -d "$HOME/.config/bash" ]]; then
