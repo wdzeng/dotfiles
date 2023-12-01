@@ -4,7 +4,7 @@ My dotfiles.
 
 ## Usage
 
-Restore dotfiles to local.
+Restore dotfiles from this repo to local.
 
 ```sh
 ./restore.sh
