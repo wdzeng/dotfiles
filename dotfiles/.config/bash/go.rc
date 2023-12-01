@@ -1,0 +1,6 @@
+# shellcheck shell=bash
+# vim: ft=bash
+
+if [ -d /usr/local/go ]; then
+    export PATH=$PATH:/usr/local/go/bin
+fi
