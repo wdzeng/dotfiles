@@ -1,27 +1,31 @@
 alias ls='ls -h --group-directories-first --color=auto'
 alias lll='ls -Al'
 
-# Equivalent to `ls -l`, or `ls -Al` if all files start with a dot.
+# A more powerful listing files. If all files are dotfiles, this is equivalent to `ls -al`;
+# otherwise show only non-dotfiles (`ls -l`).
 ll() {
-  if [[ $# -ne 0 ]]; then
+  # If the user speicifies more than one argument, just interpret it as `ls -l`.
+  if [[ $# -gt 1 ]]; then
     ls -l "$@"
     return
   fi
 
   target="${1:-.}"
-  shopt -s nullglob
-  local all_files_start_with_dot=true
-  for entry in "$target"/*; do
-    all_files_start_with_dot=false
-    break
-  done
-  shopt -u nullglob
 
-  if $all_files_start_with_dot; then
-    ls -Al "$target"
-  else
+  # If the target does not exit, do what `ls -l` does.
+  if [ ! -e "$target" ]; then
     ls -l "$target"
+    return
   fi
+
+  for item in "$target"/*; do
+    if [ -e "$item" ] && [[ $(basename "$item") != .* ]]; then
+      ls -l "$target"
+      return
+    fi
+  done
+
+  ls -Al "$target"
 }
 
 alias tree="tree -alI 'node_modules|.pnpm-store|.git'"
