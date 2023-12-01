@@ -2,5 +2,6 @@
 # vim: ft=bash
 
 if [ -d /usr/local/go ]; then
-    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH="$HOME/.local/go"
+    export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 fi
