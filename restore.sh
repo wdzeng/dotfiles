@@ -39,4 +39,4 @@ echo >&2
 echo >&2 -e "Remember to ${YELLOW}source $HOME/.bashrc${NC}"
 echo >&2 'Kill tmux server to reflect tmux config'
 echo >&2
-echo >&2 -e "Run ${YELLOW}rm -rf ${backuped[@]}${NC} to delete all backup files"
+echo >&2 -e "Run ${YELLOW}rm -rf ${backuped[*]}${NC} to delete all backup files"
