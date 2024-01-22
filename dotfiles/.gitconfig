@@ -4,7 +4,8 @@
 [user]
     name = hyperbola
     email = me@hyperbola.me
-    signingkey = 32F798E7BB12215E8B121E3EFCA80CFBF8DD7D2F
+    # TODO: place your GPG or SSH signing key here.
+    # signingkey = ???
 [commit]
     gpgsign = true
 [alias]
@@ -30,3 +31,13 @@
 [push]
 	autoSetupRemote = true
 	default = current
+
+# Uncomment following section if you want to sign commits with SSH.
+# [gpg]
+#   format = ssh
+
+# Uncomment following section if you want to use 1password to sign commits in WSL.
+# [gpg "ssh"]
+#   program = "/mnt/c/Users/hyperbola/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+# [core]
+#   sshCommand = ssh.exe

@@ -32,3 +32,10 @@ ll() {
 }
 
 alias tree="tree -alI 'node_modules|.pnpm-store|.git'"
+
+# In WSL, forward `ssh` and `ssh-add` to Windows `ssh.exe` and `ssh-add.exe`.
+if [ -n "$WSL_DISTRO_NAME" ]; then
+    # https://developer.1password.com/docs/ssh/integrations/wsl/#optional-add-an-alias-for-ssh-commands
+    alias ssh='ssh.exe'
+    alias ssh-add='ssh-add.exe'
+fi
