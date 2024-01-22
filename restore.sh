@@ -11,8 +11,8 @@ cd "$(dirname "$0")"
 backuped=()
 
 do_install() {
-    local src="dotfiles/$1"
-    local dst="$HOME/$1"
+    local src="$1"
+    local dst="$2"
 
     # If destination already exists then try to do a backup.
     if [[ -e "$dst" ]]; then
@@ -32,7 +32,10 @@ do_install() {
 }
 
 for f in $(config_list); do
-    do_install "$f"
+    # If the file ends with .wsl, install it only in WSL.
+    if [ -n "$WSL_DISTRO_NAME" ] || [[ "$f" != *.wsl ]]; then
+        do_install "dotfiles/$f" "$HOME/$f"
+    fi
 done
 
 echo >&2
@@ -40,5 +43,3 @@ echo >&2 -e "Remember to ${YELLOW}source $HOME/.bashrc${NC}"
 echo >&2 'Kill tmux server to reflect tmux config'
 echo >&2
 echo >&2 -e "Run ${YELLOW}rm -rf ${backuped[*]}${NC} to delete all backup files"
-echo >&2
-echo >&2 'Remember to update ~/.gitconfig and set your signing key.'

@@ -1,0 +1,4 @@
+[gpg "ssh"]
+  program = "/mnt/c/Users/hyperbola/AppData/Local/1Password/app/8/op-ssh-sign-wsl"
+[core]
+  sshCommand = ssh.exe
