@@ -1,0 +1,8 @@
+# shellcheck shell=bash
+# shellcheck source=/dev/null
+# vim: ft=bash
+
+# If git auto completion is not set from the system, manually set it from the source.
+if ! complete -p git 2> /dev/null && [ -r "$HOME/.config/git/completion.bash" ]; then
+    . "$HOME/.config/git/completion.bash"
+fi
