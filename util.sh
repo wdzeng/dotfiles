@@ -5,6 +5,6 @@ _LIST_PATH="$(dirname "$_SCRIPT_PATH")/list.txt"
 
 config_list() {
     while IFS= read -r line; do
-         echo "$line"
+        echo "$line"
     done < <(grep -vE '^\s*(#|$)' "$_LIST_PATH")
 }
