@@ -57,8 +57,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    if [ -e "$HOME/.config/bash/prompt.pre.rc" ]; then
-        . "$HOME/.config/bash/prompt.pre.rc"
+    if [ -e "$HOME/.config/bash/prompt.rc" ]; then
+        . "$HOME/.config/bash/prompt.rc"
     else
         PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@wsl\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     fi
@@ -75,12 +75,16 @@ xterm* | rxvt*)
 *) ;;
 esac
 
-# Load all scripts under ~/.config/bash/
-if [[ -d "$HOME/.config/bash" ]]; then
-    for f in "$HOME"/.config/bash/*.rc; do
-        # Ignore all .pre.rc files
-        if [[ "$f" != *.pre.rc ]]; then
-            . "$f"
-        fi
+# Load all scripts under ~/.config/bash/custom-first/*.rc
+if [[ -d "$HOME/.config/bash/custom-first" ]]; then
+    for f in "$HOME"/.config/bash/custom-first/*.rc; do
+        . "$f"
+    done
+fi
+
+# Load all scripts under ~/.config/bash/custom/*.rc
+if [[ -d "$HOME/.config/bash/custom" ]]; then
+    for f in "$HOME"/.config/bash/custom/*.rc; do
+        . "$f"
     done
 fi

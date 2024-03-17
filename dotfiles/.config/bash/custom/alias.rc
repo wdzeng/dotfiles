@@ -38,4 +38,5 @@ if [ -n "$WSL_DISTRO_NAME" ]; then
     # https://developer.1password.com/docs/ssh/integrations/wsl/#optional-add-an-alias-for-ssh-commands
     alias ssh='ssh.exe'
     alias ssh-add='ssh-add.exe'
+    alias scp='scp -S ssh.exe'
 fi
