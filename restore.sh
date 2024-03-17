@@ -28,14 +28,24 @@ do_install() {
     fi
 
     echo >&2 "Restore: $src -> $dst"
-    cp -r "$src" "$dst"
+
+    if [ -z "$WSL_DISTRO_NAME" ]; then
+        if [ -d "$src" ]; then
+            rsync -ar --exclude '*.wsl' "$src/" "$dst"
+        else
+            rsync -a --exclude '*.wsl' "$src" "$dst"
+        fi
+    else
+        if [ -d "$src" ]; then
+            rsync -ar "$src/" "$dst"
+        else
+            rsync -a "$src" "$dst"
+        fi
+    fi
 }
 
 for f in $(config_list); do
-    # If the file ends with .wsl, install it only in WSL.
-    if [ -n "$WSL_DISTRO_NAME" ] || [[ "$f" != *.wsl ]]; then
-        do_install "dotfiles/$f" "$HOME/$f"
-    fi
+    do_install "dotfiles/$f" "$HOME/$f"
 done
 
 echo >&2
